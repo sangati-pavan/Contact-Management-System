@@ -1,0 +1,123 @@
+Contact Management API 
+
+A RESTful API for managing contacts with user authentication, advanced contact features, and file handling capabilities.
+
+Table of Contents :
+
+    1. Project Overview
+    2. Features
+    3. Getting Started
+    4. Database Setup
+    5. Running the Backend Server
+    6. Database Schema (ER Diagram)
+    7. API Documentation
+    8. Migrations
+    9. Environment Variables
+
+1. Project Overview :
+
+This API provides a comprehensive contact management system with authentication, contact creation, search, sorting, batch processing, and file upload/download capabilities. It’s built with Node.js, Express, and PostgreSQL.
+
+2. Features :
+
+    User Authentication:  JWT-based login, registration with email verification, and password reset via one-time-code.
+    Contact Management:  Add, update, delete (soft delete), retrieve contacts, and bulk import/export functionality.
+    File Handling:  CSV and Excel upload for bulk contacts and downloadable exports.
+    Timezone Support:  Contact timestamps stored in UTC with user-specific timezone conversion.
+    Security:  Rate limiting, password hashing, and JWT authentication.
+
+3. Getting Started :
+
+    3.1 Prerequisites :
+
+        Node.js (v14+)
+        Mongoose
+    
+    3.2 Clone the repository:
+
+        git clone https://github.com/pavan-sangati/contact-management-system.git
+  
+    3.3 Install dependencies:
+
+        npm install
+
+    3.4 Set up the environment variables:
+
+        Create a .env file in the root directory and configure as follows:
+
+            DB_USER=<your_database_user>
+            DB_PASS=<your_database_password>
+            DB_NAME=<your_database_name>
+            DB_HOST=localhost
+            DB_PORT=5432
+            JWT_SECRET=<your_jwt_secret>
+            PORT=3000
+
+4. Database Setup :
+Create the PostgreSQL Database:
+
+sql
+Copy code
+CREATE DATABASE contact_management;
+Run Migrations: To set up the database schema, you can use a migration tool such as Knex.js or Sequelize. Set up tables using a migration file or run the SQL commands directly from the models directory files to set up users and contacts tables.
+
+5. Running the Backend Server :
+
+    5.1 Start the server:
+
+        npm start
+
+    The API server will be running at http://localhost:3000.
+
+    5.2 Testing the API: You can use Postman or Swagger to test API endpoints.
+
+6. Database Schema (ER Diagram) :
+
+    Below is an Entity-Relationship (ER) diagram for the database schema:
+
+    Users Table: Stores user information, including email, password, and is_verified.
+    Contacts Table: Stores contact details (e.g., name, email, phone, timezone) and is associated with users.
+
+7. API Documentation :
+
+    The API documentation is available in the following formats:
+
+    Swagger
+    Open localhost:3000/api-docs in your browser after running the server.
+    Swagger UI will display all the endpoints with request/response formats and examples.
+    Postman
+    Import the provided Postman collection located at /docs/postman_collection.json into Postman.
+    Configure the environment variables for your local setup (e.g., base URL and JWT token) to test endpoints.
+
+8. Migrations :
+
+    You can use a migration tool like Knex.js to create and manage migrations.
+
+    Example Migration Commands with Knex.js
+    Initialize Knex:
+
+    npx knex init
+    Create Migration Files:
+
+    npx knex migrate:make create_users_table
+    npx knex migrate:make create_contacts_table
+    Run Migrations:
+
+    npx knex migrate:latest
+
+9. Environment Variables :
+
+    Variable	Description
+    DB_USER	    Database user
+    DB_PASS	    Database password
+    DB_NAME	    Database name
+    DB_HOST	    Database host, typically localhost
+    DB_PORT	    Database port, default is 5432
+    JWT_SECRET	Secret key for JWT generation
+    PORT	    Port for running the server, default is 3000
+
+    Additional Information :
+
+    Error Handling: All endpoints return errors in a consistent JSON format.
+    Data Validation: User input is validated using Yup, ensuring data consistency and integrity.
+    File Handling: CSV and Excel file uploads are supported for bulk contact management, and output files can be downloaded.
